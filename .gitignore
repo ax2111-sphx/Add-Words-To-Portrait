@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 敏感信息保护
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
