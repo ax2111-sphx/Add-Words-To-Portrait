@@ -20,12 +20,12 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ className }) => {
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.type.startsWith('image/')) {
-      alert('请上传图片文件 (JPG, PNG)');
+      alert('Please upload an image file (JPG, PNG)');
       return;
     }
     
     if (file.size > 10 * 1024 * 1024) {
-      alert('图片大小不能超过 10MB');
+      alert('Image size cannot exceed 10MB');
       return;
     }
 
@@ -44,7 +44,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ className }) => {
       console.error('Upload failed:', error);
       setIsUploading(false);
       setIsProcessing(false);
-      alert('上传或处理失败，请重试');
+      alert('Upload or processing failed, please try again');
     }
   }, [setOriginalImage, setProcessedImage, setIsUploading, setIsProcessing]);
 
@@ -81,8 +81,8 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ className }) => {
         <div className="flex flex-col items-center gap-4 text-center p-8">
           <Loader2 className="w-12 h-12 text-primary animate-spin" />
           <div className="space-y-2">
-            <h3 className="text-xl font-medium text-foreground">正在进行AI抠图...</h3>
-            <p className="text-sm text-muted-foreground">智能识别人物主体，马上就好</p>
+            <h3 className="text-xl font-medium text-foreground">AI Background Removal in Progress...</h3>
+            <p className="text-sm text-muted-foreground">Intelligently identifying the subject, almost done</p>
           </div>
         </div>
       ) : (
@@ -91,8 +91,8 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ className }) => {
             <UploadCloud className="w-10 h-10 text-primary" />
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-medium text-foreground">上传旅行照片</h3>
-            <p className="text-sm text-muted-foreground">点击或拖拽上传，支持 JPG/PNG (最大 10MB)</p>
+            <h3 className="text-xl font-medium text-foreground">Upload Travel Photo</h3>
+            <p className="text-sm text-muted-foreground">Click or drag to upload, supports JPG/PNG (Max 10MB)</p>
           </div>
           
           <div className="relative">
@@ -104,7 +104,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ className }) => {
             />
             <Button size="lg" className="px-8">
               <ImageIcon className="w-5 h-5 mr-2" />
-              选择图片
+              Select Image
             </Button>
           </div>
         </div>

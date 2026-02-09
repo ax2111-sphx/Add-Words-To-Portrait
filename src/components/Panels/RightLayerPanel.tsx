@@ -16,7 +16,7 @@ export const RightLayerPanel: React.FC<RightLayerPanelProps> = ({ onExport, isEx
       <div className="p-6 border-b border-gray-100">
         <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
           <Layers className="w-5 h-5 text-primary" />
-          图层管理
+          Layer Management
         </h2>
       </div>
 
@@ -28,8 +28,8 @@ export const RightLayerPanel: React.FC<RightLayerPanelProps> = ({ onExport, isEx
               <img src={processedImage} className="w-full h-full object-cover" alt="Cutout" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">人物主体</p>
-              <p className="text-xs text-gray-500">顶层 (自动)</p>
+              <p className="text-sm font-medium text-gray-900 truncate">Subject</p>
+              <p className="text-xs text-gray-500">Top (Auto)</p>
             </div>
           </div>
         )}
@@ -50,9 +50,9 @@ export const RightLayerPanel: React.FC<RightLayerPanelProps> = ({ onExport, isEx
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">
-                {text.content || '空文本'}
+                {text.content || 'Empty Text'}
               </p>
-              <p className="text-xs text-gray-500">文字图层 {texts.length - index}</p>
+              <p className="text-xs text-gray-500">Text Layer {texts.length - index}</p>
             </div>
             <button
               onClick={(e) => {
@@ -73,8 +73,8 @@ export const RightLayerPanel: React.FC<RightLayerPanelProps> = ({ onExport, isEx
               <img src={originalImage} className="w-full h-full object-cover" alt="Original" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">原图背景</p>
-              <p className="text-xs text-gray-500">底层 (锁定)</p>
+              <p className="text-sm font-medium text-gray-900 truncate">Background</p>
+              <p className="text-xs text-gray-500">Bottom (Locked)</p>
             </div>
           </div>
         )}
@@ -87,20 +87,20 @@ export const RightLayerPanel: React.FC<RightLayerPanelProps> = ({ onExport, isEx
           className="w-full h-12 text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
         >
           <Download className="w-5 h-5 mr-2" />
-          导出海报
+          Export Poster
         </Button>
         
         <Button 
           variant="ghost" 
           onClick={() => {
-            if (window.confirm('确定要清空所有内容并重新开始吗？')) {
+            if (window.confirm('Are you sure you want to reset all content?')) {
               reset();
             }
           }}
           className="w-full text-gray-500 hover:text-red-500 hover:bg-red-50"
         >
           <RefreshCcw className="w-4 h-4 mr-2" />
-          重新开始
+          Start Over
         </Button>
       </div>
     </div>

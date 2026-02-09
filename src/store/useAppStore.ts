@@ -52,7 +52,7 @@ export const useAppStore = create<AppState>((set) => ({
   addText: () => set((state) => {
     const newText: TextLayer = {
       id: crypto.randomUUID(),
-      content: '双击编辑文字',
+      content: 'Double click to edit',
       x: 50, // Percentage or pixels? Let's assume percentage for responsiveness or pixels relative to container. Let's use percentage (0-100) to be safe across sizes, or just pixels. Let's start with center-ish.
       y: 50,
       fontSize: 24,

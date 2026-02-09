@@ -14,35 +14,35 @@ export const LeftToolPanel: React.FC = () => {
       <div className="p-6 border-b border-gray-100">
         <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
           <Type className="w-5 h-5 text-primary" />
-          文字工具
+          Text Tools
         </h2>
-        <p className="text-xs text-muted-foreground mt-1">添加并修饰您的海报文字</p>
+        <p className="text-xs text-muted-foreground mt-1">Add and style your poster text</p>
       </div>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
         {/* Action Button */}
         <Button onClick={addText} className="w-full py-6 text-lg font-medium shadow-lg shadow-primary/10 hover:shadow-primary/20 transition-all bg-primary hover:bg-primary-hover">
-          <span className="text-2xl mr-2">+</span> 添加文字图层
+          <span className="text-2xl mr-2">+</span> Add Text Layer
         </Button>
 
         {selectedText ? (
           <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-300">
             {/* Content Input */}
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">内容</label>
+              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">Content</label>
               <div className="relative">
                 <textarea
                   value={selectedText.content}
                   onChange={(e) => updateText(selectedText.id, { content: e.target.value })}
                   className="w-full min-h-[80px] p-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all resize-none text-sm"
-                  placeholder="输入文字..."
+                  placeholder="Enter text..."
                 />
               </div>
             </div>
 
             {/* Font Family */}
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">字体</label>
+              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">Typography</label>
               <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
                 {FONT_OPTIONS.map((font) => (
                   <button
@@ -75,7 +75,7 @@ export const LeftToolPanel: React.FC = () => {
                     : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                <Bold className="w-4 h-4" /> 粗体
+                <Bold className="w-4 h-4" /> Bold
               </button>
               <button
                 onClick={() => updateText(selectedText.id, { fontStyle: selectedText.fontStyle === 'italic' ? 'normal' : 'italic' })}
@@ -85,7 +85,7 @@ export const LeftToolPanel: React.FC = () => {
                     : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                <Italic className="w-4 h-4" /> 斜体
+                <Italic className="w-4 h-4" /> Italic
               </button>
             </div>
 
@@ -93,7 +93,7 @@ export const LeftToolPanel: React.FC = () => {
             <div className="space-y-6">
               <div className="space-y-3">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-400 flex justify-between">
-                  大小
+                  Size
                   <span className="text-foreground font-mono">{selectedText.fontSize}px</span>
                 </label>
                 <Slider
@@ -107,7 +107,7 @@ export const LeftToolPanel: React.FC = () => {
 
               <div className="space-y-3">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-400 flex justify-between">
-                  旋转
+                  Rotation
                   <span className="text-foreground font-mono">{selectedText.rotation ?? 0}°</span>
                 </label>
                 <div className="flex items-center gap-3">
@@ -123,7 +123,7 @@ export const LeftToolPanel: React.FC = () => {
 
               <div className="space-y-3">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-400 flex justify-between">
-                  字间距
+                  Letter Spacing
                   <span className="text-foreground font-mono">{selectedText.letterSpacing ?? 0}em</span>
                 </label>
                 <Slider
@@ -137,7 +137,7 @@ export const LeftToolPanel: React.FC = () => {
 
               <div className="space-y-3">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-400 flex justify-between">
-                  行高
+                  Line Height
                   <span className="text-foreground font-mono">{selectedText.lineHeight ?? 1.2}</span>
                 </label>
                 <Slider
@@ -151,7 +151,7 @@ export const LeftToolPanel: React.FC = () => {
               
               <div className="space-y-3">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-400 flex justify-between">
-                  阴影深度
+                  Shadow Depth
                   <span className="text-foreground font-mono">{selectedText.textShadow ?? 0}px</span>
                 </label>
                 <Slider
@@ -165,7 +165,7 @@ export const LeftToolPanel: React.FC = () => {
 
             {/* Color */}
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">颜色</label>
+              <label className="text-xs font-bold uppercase tracking-wider text-gray-400">Color</label>
               <div className="flex gap-3 items-center">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden ring-1 ring-gray-200 shadow-sm cursor-pointer hover:scale-105 transition-transform">
                   <input
@@ -189,14 +189,14 @@ export const LeftToolPanel: React.FC = () => {
                 className="w-full text-red-500 hover:text-red-600 hover:bg-red-50 justify-start h-12"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
-                删除当前图层
+                Delete Layer
               </Button>
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center h-64 text-gray-400 text-center px-4 border-2 border-dashed border-gray-100 rounded-xl bg-gray-50/50">
             <AlignLeft className="w-12 h-12 mb-3 opacity-20" />
-            <p className="text-sm font-medium">点击画布上的文字<br/>或添加新文字以开始编辑</p>
+            <p className="text-sm font-medium">Select text on canvas<br/>or add new text to edit</p>
           </div>
         )}
       </div>

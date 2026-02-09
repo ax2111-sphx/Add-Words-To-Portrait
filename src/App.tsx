@@ -38,7 +38,7 @@ function App() {
       document.body.removeChild(link);
     } catch (error) {
       console.error("Export failed:", error);
-      alert("导出失败，请重试");
+      alert("Export failed, please try again");
     } finally {
       setIsExporting(false);
     }

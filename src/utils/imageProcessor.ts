@@ -26,34 +26,30 @@ async function mockRemoveBackground(imageUrl: string): Promise<string> {
 }
 
 /**
- * Calls Remove.bg API to remove background.
+ * Calls Backend Proxy to remove background.
  */
 export async function removeBackground(imageUrl: string): Promise<string> {
-  const apiKey = import.meta.env.VITE_REMOVE_BG_API_KEY;
-
-  // If no key is configured, fallback to mock immediately (or warn)
-  if (!apiKey || apiKey === 'your_api_key_here') {
-    console.warn("No VITE_REMOVE_BG_API_KEY found. Using mock mode.");
-    return mockRemoveBackground(imageUrl);
-  }
-
+  // Frontend no longer needs to know about the API Key
+  
   try {
     const blob = dataURLtoBlob(imageUrl);
     const formData = new FormData();
     formData.append('image_file', blob);
     formData.append('size', 'auto');
 
-    const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+    // Call our local backend proxy
+    const response = await fetch('/api/remove-bg', {
       method: 'POST',
-      headers: {
-        'X-Api-Key': apiKey,
-      },
       body: formData,
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.errors?.[0]?.title || `API Error: ${response.status}`);
+      // Check if it's a server configuration error (missing key)
+      if (response.status === 500 && errorData.error?.includes('API Key missing')) {
+        throw new Error('Server configuration error: REMOVE_BG_API_KEY is missing on the server.');
+      }
+      throw new Error(errorData.error || errorData.errors?.[0]?.title || `Server Error: ${response.status}`);
     }
 
     const resultBlob = await response.blob();
@@ -64,14 +60,14 @@ export async function removeBackground(imageUrl: string): Promise<string> {
     
     // User interaction for fallback
     const shouldFallback = window.confirm(
-      `AI 抠图失败: ${error instanceof Error ? error.message : '未知错误'}\n\n是否切换到模拟模式（仅显示原图）继续？`
+      `AI background removal failed: ${error instanceof Error ? error.message : 'Unknown error'}\n\nSwitch to mock mode (show original image only) to continue?`
     );
 
     if (shouldFallback) {
       return mockRemoveBackground(imageUrl);
     }
     
-    throw error; // Re-throw if user cancels, so UI stays in error state or handles it
+    throw error;
   }
 }
 
